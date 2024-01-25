@@ -52,7 +52,7 @@ jobs:
         sudo -E update-alternatives --install $(which python) python /usr/bin/python2.7 20
         sudo -E git config --global user.name 'GitHub Actions'
         sudo -E git config --global user.email 'noreply@github.com'
-        git clone https://github.com/hboyd2003/repo
+        git clone https://github.com/friendlyarm/repo
         sudo -E cp repo/repo /usr/bin/
         mkdir -p ./artifact
         sudo swapoff -a
@@ -64,7 +64,7 @@ jobs:
         mkdir project
         cd project
         repo init --depth=1 -u https://github.com/friendlyarm/friendlywrt_manifests -b master-v${{ matrix.VERSION }} \
-                -m rk3399.xml --repo-url=http://github.com/hboyd2003/repo  --no-clone-bundle
+                -m rk3399.xml --repo-url=https://github.com/friendlyarm/repo  --no-clone-bundle
 
         repo sync -c friendlywrt --no-clone-bundle
         repo sync -c configs --no-clone-bundle
@@ -162,7 +162,7 @@ jobs:
         sudo -E update-alternatives --install $(which python) python /usr/bin/python2.7 20
         sudo -E git config --global user.name 'GitHub Actions'
         sudo -E git config --global user.email 'noreply@github.com'
-        git clone https://github.com/hboyd2003/repo
+        git clone https://github.com/friendlyarm/repo
         sudo -E cp repo/repo /usr/bin/
         mkdir -p ./artifact
         sudo swapoff -a
@@ -174,7 +174,7 @@ jobs:
         mkdir project
         cd project
         repo init --depth=1 -u https://github.com/friendlyarm/friendlywrt_manifests -b master-v${{ matrix.VERSION }} \
-                -m ${{ matrix.CPU }}.xml --repo-url=https://github.com/hboyd2003/repo  --no-clone-bundle
+                -m ${{ matrix.CPU }}.xml --repo-url=https://github.com/friendlyarm/repo  --no-clone-bundle
 
         repo sync -c kernel --no-clone-bundle
         repo sync -c u-boot --no-clone-bundle
