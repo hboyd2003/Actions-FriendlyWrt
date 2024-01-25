@@ -98,7 +98,7 @@ jobs:
     - name: Download package
       run: |
         cd project/friendlywrt
-        make download -j16
+        make download -j24
         find dl -size -1024c -exec ls -l {} \;
         find dl -size -1024c -exec rm -f {} \;
         echo "cores: $(nproc)"
@@ -108,7 +108,7 @@ jobs:
       continue-on-error: true
       run: |
         cd project/friendlywrt
-        make -j16 || make -j1 V=s
+        make -j || make -j1 V=s
         echo $?
 
     - name: Check the result and try again
