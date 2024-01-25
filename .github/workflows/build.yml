@@ -73,6 +73,7 @@ jobs:
         repo sync -c scripts --no-clone-bundle
         repo sync -c scripts/sd-fuse  --no-clone-bundle
         repo sync -c toolchain  --no-clone-bundle
+        echo "cores: $(nproc)"
 
     - name: Apply customizations
       run: |
@@ -92,20 +93,22 @@ jobs:
         TARGET_FRIENDLYWRT_CONFIG=${CONFIG}
         EOL
         DEBUG_DOT_CONFIG=1 ./build.sh friendlywrt
+        echo "cores: $(nproc)"
 
     - name: Download package
       run: |
         cd project/friendlywrt
-        make download -j8
+        make download -j16
         find dl -size -1024c -exec ls -l {} \;
         find dl -size -1024c -exec rm -f {} \;
+        echo "cores: $(nproc)"
 
     - name: Compile friendlyWrt
       id: compile
       continue-on-error: true
       run: |
         cd project/friendlywrt
-        make -j$(nproc) || make -j1 V=s
+        make -j16 || make -j1 V=s
         echo $?
 
     - name: Check the result and try again
