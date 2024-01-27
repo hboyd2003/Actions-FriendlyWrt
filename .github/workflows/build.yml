@@ -98,7 +98,7 @@ jobs:
     - name: Download package
       run: |
         cd project/friendlywrt
-        make download -j24
+        make download -j12
         find dl -size -1024c -exec ls -l {} \;
         find dl -size -1024c -exec rm -f {} \;
         echo "cores: $(nproc)"
@@ -108,7 +108,7 @@ jobs:
       continue-on-error: true
       run: |
         cd project/friendlywrt
-        make -j || make -j1 V=s
+        make -j4 || make -j1 V=s
         echo $?
 
     - name: Check the result and try again
@@ -144,9 +144,9 @@ jobs:
 
     strategy:
       matrix:
-        VERSION: [21.02, 23.05]
-        CPU: [rk3328, rk3399, rk3568, rk3588]
-        SET: [docker, non-docker]
+        VERSION: [23.05]
+        CPU: [rk3568]
+        SET: [docker]
     steps:
     - name: Checkout
       uses: actions/checkout@main
